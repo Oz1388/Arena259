@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++17
 SRC      = ./src/*.cpp
 TARGET   = ./arena
 
-all: $(TARGET)
+build: $(TARGET)
 
 $(TARGET):
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)

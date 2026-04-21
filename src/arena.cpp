@@ -1,5 +1,6 @@
 #include <iostream>
 #include "arena.h"
+using namespace std;
 
 void Arena::battle(Creature &a, Creature &b)
 {
@@ -33,4 +34,69 @@ void Arena::battle(Creature &a, Creature &b)
     {
         std::cout << b.name << " wins!" << std::endl;
     }
+
 }
+
+void Arena::Colluseum(std::vector<Creature> creatures){
+        srand(time(0)); // begins randomness
+        int turn = 1;
+
+        // loop until 1 creature left alive
+        while (true)
+            {
+                cout << "\nTurn " << turn << endl;
+
+                int aliveCount = 0;
+
+                // count living creatures
+                for (int i = 0; i < creatures.size(); i++)
+                {
+                    if (creatures[i].isAlive())
+                    {
+                        aliveCount++;
+                    }
+                }
+
+                // stop if only 1 is left
+                if (aliveCount <= 1)
+                {
+                    break;
+                }
+
+                int attackerIndex;
+
+                // find random living attacker
+                attackerIndex = rand() % creatures.size();
+                
+                while (!creatures[attackerIndex].isAlive());
+
+                int targetIndex;
+
+                // find random living target that is not the attacker
+                do
+                {
+                    targetIndex = rand() % creatures.size();
+                }
+                while (targetIndex == attackerIndex || !creatures[targetIndex].isAlive());
+
+                // attack target
+                cout << creatures[attackerIndex].name << " attacks "
+                    << creatures[targetIndex].name << endl;
+
+                creatures[attackerIndex].attack(creatures[targetIndex]);
+
+                cout << creatures[targetIndex].name << " health: "
+                    << creatures[targetIndex].health << endl;
+
+                turn++;
+            }
+
+            // print winner
+            for (int i = 0; i < creatures.size(); i++)
+            {
+                if (creatures[i].isAlive())
+                {
+                    cout << "\nWinner, Winner Chicken Dinner! " << creatures[i].name << endl;
+                }
+            }
+        }

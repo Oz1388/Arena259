@@ -11,7 +11,7 @@ class Arena
 public:
     static void battle(Creature &a, Creature &b);
 
-    static void Colluseum(std::vector<Creature> creatures);
+//    static void Colluseum(std::vector<Creature> creatures);
 };
 
 #endif

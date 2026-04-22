@@ -36,7 +36,7 @@ void Arena::battle(Creature &a, Creature &b)
     }
 
 }
-
+/**
 void Arena::Colluseum(std::vector<Creature> creatures){
         srand(time(0)); // begins randomness
         int turn = 1;
@@ -100,3 +100,4 @@ void Arena::Colluseum(std::vector<Creature> creatures){
                 }
             }
         }
+        */

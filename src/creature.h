@@ -8,31 +8,50 @@ const int MIN_HEALTH = 80;
 const int MAX_HEALTH = 120;
 
 
+
 class Creature
 {
-public:
+private: 
     std::string name;
     int health;
     int damage;
 
-    Creature(std::string n, int h, int d)
-    {
-        name = n;
-        health = h;
-        damage = d;
+    inline static int creatureCount = 0; // Static member to keep track of the number of creatures created
+
+public: 
+    std::string getName() const { return name; }
+    int getHealth() const { return health; }
+    int getDamage() const { return damage; }
+
+    // Static method to get the current count of creatures created
+    static int getCreatureCount(){
+    return creatureCount;
     }
 
-    void attack(Creature &other)
-    {
-
-        other.health -= damage;
-        if (other.health < 0)
-        {
-            other.health = 0;
-        }
+Creature(std::string n, int h, int d) // constructor to initialize the creature's name, health, and damage
+    : name(n), health(h), damage(d){
+    creatureCount++;
     }
 
-    bool isAlive()
+void takeDamage(int dmg) // method to reduce the creature's health by the damage taken
+{
+    health -= dmg;
+    if (health < 0)
+        health = 0;
+}
+
+void attack(Creature &other) // IT WANTS TO SUCK YOUR BLOOD! MUWAHAHHAHAHA
+{
+    other.takeDamage(damage);
+
+    // Giant Leech heals after attacking because leeches drain life.
+    if (name == "Giant Leech")
+    {
+        health += 5;
+    }
+}
+
+    bool isAlive() const // method to check if the creature is still alive (health > 0)
     {
         return health > 0;
     }
